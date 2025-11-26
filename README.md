@@ -1,4 +1,4 @@
- AIM - AI Tool Matcher
+# AIM - AI Tool Matcher
 
 AI 툴에 대한 정보를 제공하고 사용자에게 가장 적합한 AI 툴을 추천해주는 웹사이트입니다.
 
@@ -58,3 +58,4 @@ AIM/
 - 백엔드 서버 파일(`server/`, `server.js`)은 GitHub Pages 배포에 포함하지 않습니다.
 - API 호출이 필요한 경우 별도의 백엔드 서버를 배포해야 합니다.
 - `node_modules/`는 `.gitignore`에 포함되어 있어 업로드되지 않습니다.
+
