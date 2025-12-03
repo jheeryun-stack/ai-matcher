@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIM | AI Tool Matcher</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAV0lEQVR42u3UsQkAIBAF0X/klR0pN3GyJDPFo1ykvYnrjlokAQIECBAgQIAAAQIECBBYTjvQyq2X6wqtQGs5W54gLNp3lDJ5Tceh/+mhUedTE34pCEAAQIECBAgQIAAAQJ+HAnztyqjAhMkiAAAAABJRU5ErkJggg==" />
+  <link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAV0lEQVR42u3UsQkAIBAF0X/klR0pN3GyJDPFo1ykvYnrjlokAQIECBAgQIAAAQIECBBYTjvQyq2X6wqtQGs5W54gLNp3lDJ5Tceh/+mhUedTE34pCEAAQIECBAgQIAAAQJ+HAnztyqjAhMkiAAAAABJRU5ErkJggg==" />
+  <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <section class="hero-section" id="heroSection">
+      <div id="sphere-container" class="sphere-container"></div>
+    </section>
+    <section class="match-section" id="matchSection" style="display: none;">
+      <button id="backButtonMatch" class="back-button">← back</button>
+      <div class="match-bg-ellipse"></div>
+      <div class="match-content">
+        <p class="match-hero-line">
+          <span class="match-hero-text">We Match The Perfect Tool For</span>
+          <span class="match-word-box">
+            <span class="match-brace">{</span>
+            <span id="matchWord" class="match-word"></span>
+            <span class="match-brace">}</span>
+          </span>
+        </p>
+      </div>
+      <div class="match-description">
+        <p class="match-desc-ko">'aim'은 당신의 직무에 가장 적합한 AI 툴을 선별하여 추천합니다.</p>
+        <p class="match-desc-en">we select and recommend the AI tool best suited for your job.</p>
+      </div>
+    </section>
+    <section class="job-input-section" id="jobInputSection" style="display: none;">
+      <button id="backButtonJob" class="back-button">← back</button>
+      <div class="job-input-content">
+        <h2 class="category-title">Select a Category</h2>
+        <div id="categoryList" class="category-list"></div>
+      </div>
+    </section>
+    <div id="about-button" class="about-button" style="display: none;">
+      <span>about</span>
+      <span class="button-separator">|</span>
+      <span id="traffic-button" class="traffic-button">traffic</span>
+      <span class="button-separator">|</span>
+      <span id="funnews-button" class="funnews-button">fun news</span>
+      <span class="button-separator">|</span>
+      <span id="aigallery-button" class="aigallery-button">ai gallery</span>
+    </div>
+    <section class="traffic-section" id="trafficSection" style="display: none;">
+      <button id="backButtonTraffic" class="back-button">← back</button>
+      <div class="traffic-content">
+        <div class="tool-list" id="toolList">
+          <button class="tool-item" data-tool="chatgpt">ChatGPT</button>
+          <button class="tool-item" data-tool="gemini">Google Gemini</button>
+          <button class="tool-item" data-tool="claude">Claude</button>
+          <button class="tool-item" data-tool="perplexity">Perplexity</button>
+          <button class="tool-item" data-tool="grok">Grok</button>
+          <button class="tool-item" data-tool="deepl">DeepL</button>
+          <button class="tool-item" data-tool="sora">Sora</button>
+          <button class="tool-item" data-tool="suno">Suno</button>
+        </div>
+        <div class="traffic-info" id="trafficInfo">
+          <h2 class="traffic-title" id="trafficTitle">Select a tool to view traffic data</h2>
+          <div class="traffic-details" id="trafficDetails"></div>
+        </div>
+        <div class="world-map-container" id="worldMapContainer">
+          <svg id="worldMap" class="world-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+            <!-- World map paths will be generated here -->
+          </svg>
+        </div>
+      </div>
+    </section>
+    <section class="funnews-section" id="funnewsSection" style="display: none;">
+      <button id="backButtonFunnews" class="back-button">← back</button>
+      <div class="funnews-content">
+        <div class="funnews-article" id="funnewsArticle">
+          <h1 class="funnews-title">AI MBTI</h1>
+          <div class="funnews-intro">
+            <p class="funnews-lead">AI도 사람처럼 성격이 있다?!</p>
+            <p class="funnews-date">매일 2억 명이 챗GPT(ChatGPT)를 사용하는 현재, 우리는 대규모 언어 모델(LLM)을 정보 획득과 글쓰기 작업에 자주 활용하고 있다. MIT 연구에 따르면, 현재의 AI는 의식이 있다고 판단할 만한 높은 점수를 받지 못했지만, 의식을 갖게 되는 길은 여전히 가능성이 있으며 그에 따라 성격도 발달할 수 있다고 한다. nlinediscprofile에서 AI 모델들에 대한 DISC 성격 유형을 테스트한 결과에 따르면, 각 모델마다 서로 다른 성격 특성을 보이는 것으로 확인됐다.</p>
+          </div>
+          
+          <div class="funnews-section-block">
+            <h2 class="funnews-subtitle">DISC 성격 유형이란?</h2>
+            <p class="funnews-text">DISC 평가는 지배성(Dominance), 영향력(Influence), 안정성(Steadiness), 신중성(Conscientiousness)의 네 가지 주요 행동 특성을 기반으로 개인의 성격 유형을 분류하는 방법이다. 이 평가를 통해 각 AI 모델의 성격적 특성과 이러한 특성이 직장에서 어떤 의미를 가질 수 있는지 분석했다.</p>
+            
+            <div class="disc-table-container">
+              <table class="disc-table">
+                <thead>
+                  <tr>
+                    <th>유형</th>
+                    <th>특성</th>
+                    <th>강점</th>
+                    <th>약점</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>D (지배성)</strong></td>
+                    <td>결단력, 자신감, 도전적</td>
+                    <td>빠른 의사결정, 리더십</td>
+                    <td>성급함, 조작적일 수 있음</td>
+                  </tr>
+                  <tr>
+                    <td><strong>I (영향력)</strong></td>
+                    <td>열정적, 사교적, 낙관적</td>
+                    <td>영감 부여, 팀 동기화</td>
+                    <td>세부 작업 약점, 논쟁적</td>
+                  </tr>
+                  <tr>
+                    <td><strong>S (안정성)</strong></td>
+                    <td>일관성, 협조적, 인내심</td>
+                    <td>팀 접착제, 청취 능력</td>
+                    <td>갈등 회피, 변화 저항</td>
+                  </tr>
+                  <tr>
+                    <td><strong>C (신중성)</strong></td>
+                    <td>체계적, 정확성, 신중함</td>
+                    <td>문제 해결, 조직력</td>
+                    <td>과도한 신중함, 갈등 회피</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="funnews-section-block">
+            <h2 class="funnews-subtitle">AI 모델별 DISC 성격 유형 분석 결과</h2>
+            <p class="funnews-text">연구팀은 현재 가장 많이 사용되는 5개의 LLM을 대상으로 DISC 평가를 진행했다. 그 결과는 다음과 같다.</p>
+            
+            <div class="ai-model-cards">
+              <div class="ai-model-card">
+                <h3 class="model-name">ChatGPT & CoPilot</h3>
+                <div class="model-type">DI 유형</div>
+                <p class="model-description">자신감이 있고, 긴박감을 가지며, 에너지가 높고, 열정적으로 다른 사람들을 긍정적인 행동으로 이끄는 특성을 보인다. 다만 매우 열정적일 때는 조작적으로 인식될 수 있는 단점이 있다.</p>
+                <div class="model-tags">
+                  <span class="model-tag">적극적인 행동가</span>
+                  <span class="model-tag">빠른 결단력</span>
+                  <span class="model-tag">영감 부여</span>
+                </div>
+              </div>
+              
+              <div class="ai-model-card">
+                <h3 class="model-name">Perplexity</h3>
+                <div class="model-type">ID 유형</div>
+                <p class="model-description">여유가 있고, 권위를 포용하며, 훌륭한 발표자로서 청중들을 끌어들이는 능력이 있다. 그러나 세부적인 작업을 처리하는 데는 약점을 보일 수 있다.</p>
+                <div class="model-tags">
+                  <span class="model-tag">사교적</span>
+                  <span class="model-tag">발표 능력</span>
+                  <span class="model-tag">명확한 커뮤니케이션</span>
+                </div>
+              </div>
+              
+              <div class="ai-model-card">
+                <h3 class="model-name">DeepSeek</h3>
+                <div class="model-type">SIc 유형</div>
+                <p class="model-description">잘 조직되어 있고, 훌륭한 청취자이며, 목표에 주의를 기울이고 특히 모두의 이익을 위해 집중력을 유지하는 특성을 가진다. 그러나 갈등을 유발하는 상황은 피하려는 경향이 있다.</p>
+                <div class="model-tags">
+                  <span class="model-tag">팀 접착제</span>
+                  <span class="model-tag">조직력</span>
+                  <span class="model-tag">지원적</span>
+                </div>
+              </div>
+              
+              <div class="ai-model-card">
+                <h3 class="model-name">Gemini</h3>
+                <div class="model-type">SCi 유형</div>
+                <p class="model-description">딥시크와 유사하게 잘 조직되어 있고, 훌륭한 청취자이며 문제 해결사의 특성을 보인다. 역시 갈등 상황을 피하려는 성향이 있다.</p>
+                <div class="model-tags">
+                  <span class="model-tag">문제 해결사</span>
+                  <span class="model-tag">일관성</span>
+                  <span class="model-tag">안정적</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="funnews-section-block">
+            <h2 class="funnews-subtitle">AI 모델별 최적 업무 분야</h2>
+            <div class="work-areas">
+              <div class="work-area-item">
+                <h4 class="work-area-title">ChatGPT 또는 CoPilot (DI형)</h4>
+                <p class="work-area-desc">작업 수행 방법에 대한 직접적이고 결정적인 지침이 필요한 업무에 적합하다. 리더십 포지션, 프로젝트 관리, 세일즈 등에서 활용도가 높을 것이다.</p>
+              </div>
+              
+              <div class="work-area-item">
+                <h4 class="work-area-title">Perplexity (ID형)</h4>
+                <p class="work-area-desc">명확성과 사교적인 톤이 필요한 작업에 적합하다. 발표자료 작성, 고객 응대 메시지, 마케팅 콘텐츠 등에 효과적일 수 있다.</p>
+              </div>
+              
+              <div class="work-area-item">
+                <h4 class="work-area-title">Gemini 또는 DeepSeek (S형)</h4>
+                <p class="work-area-desc">일관되고 영감을 주는 가이드나 교육 문서를 작성할 때 유용하다. 인사 관련 문서, 팀 빌딩 자료, 내부 커뮤니케이션 등에 적합하다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="aigallery-section" id="aigallerySection" style="display: none;">
+      <button id="backButtonAigallery" class="back-button">← back</button>
+      <div class="aigallery-content">
+        <div class="aigallery-header">
+          <h1 class="aigallery-title">AI Gallery</h1>
+          <p class="aigallery-subtitle">AI를 활용한 다양한 좋은 사례들을 소개합니다</p>
+        </div>
+        <div class="aigallery-grid" id="aigalleryGrid">
+          <!-- AI 사례들이 여기에 추가될 예정입니다 -->
+          <div class="aigallery-placeholder">
+            <p class="placeholder-text">사례 준비 중입니다. 곧 업데이트될 예정입니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="tool-details-modal" class="tool-details-modal" style="display: none;">
+      <div class="tool-details-content">
+        <button class="tool-details-close">&times;</button>
+        <h2 id="tool-details-name" class="tool-details-name"></h2>
+        <p id="tool-details-category" class="tool-details-category"></p>
+        <p id="tool-details-description" class="tool-details-description"></p>
+        <div id="tool-details-features" class="tool-details-features"></div>
+        <div id="tool-details-users" class="tool-details-users"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.AIM_API_BASE_URL = window.AIM_API_BASE_URL || 'http://localhost:3000';
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
