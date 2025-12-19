@@ -59,3 +59,4 @@ AIM/
 - API 호출이 필요한 경우 별도의 백엔드 서버를 배포해야 합니다.
 - `node_modules/`는 `.gitignore`에 포함되어 있어 업로드되지 않습니다.
 
+https://github.com/user-attachments/assets/9e427ff4-3a4c-48e9-b1b1-b6e1a2c64336
